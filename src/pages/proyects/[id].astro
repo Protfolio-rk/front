@@ -1,0 +1,64 @@
+---
+import { getApiService } from "@/services";
+import ProyectsPage from "./index.astro";
+import { DetailedProyect } from "@/css";
+import { GithubLogo, IconChip, RichText } from "@/components";
+import { ImageSlider } from "@/components/imgSlider";
+import { STATIC_PATH } from "@/utils/enviroment";
+
+const { id } = Astro.params;
+const content =
+  id ?
+    await getApiService()
+      .getFullProyectInfo(id)
+      .catch((e) => {
+        console.error(e);
+        Astro.response.status = 404;
+        return null;
+      }) :
+    null;
+
+export const prerender = false;
+---
+
+{
+  content &&
+    <ProyectsPage
+      title={content.name}
+      MetaTags={{
+        "og:title": content.name,
+        "twitter:title": content.name,
+        "og:url": "/proyects/" + content.id,
+        "twitter:url": "/proyects/" + content.id,
+        "twitter:description": content.resume,
+        "og:description": content.resume,
+        "og:image": STATIC_PATH + content.ScreenShots[0]?.sizes.card.url,
+        "twitter:image": STATIC_PATH + content.ScreenShots[0]?.sizes.card.url,
+        keywords: content.keywords.map(v => v.name).join(", "),
+      }}>
+      <div class={DetailedProyect.detail}>
+        <div class={DetailedProyect.head}>
+          <div class={DetailedProyect.title}>
+            <h1>{content.name}</h1>
+            <a href={content.Repository} target="_blank">
+              <GithubLogo className="ghlogo" />
+            </a>
+          </div>
+          <div class={DetailedProyect.stack}>
+            {content.stack.map((i) => (
+              <IconChip name={i} />
+            ))}
+          </div>
+        </div>
+        <RichText content={content.description} className={DetailedProyect.text} />
+        {
+          (content.ScreenShots.length > 0) &&
+            <ImageSlider
+              staticPath={STATIC_PATH}
+              client:visible
+              images={content.ScreenShots}
+            />
+        }
+      </div>
+    </ProyectsPage>
+}

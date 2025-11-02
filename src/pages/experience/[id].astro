@@ -1,0 +1,60 @@
+---
+import { getApiService } from "@/services";
+import ExperiencePage from "./index.astro";
+import { IconChip, RichText } from "@/components";
+import { DetailedExperience } from "@/css";
+
+const { id } = Astro.params;
+const content =
+  id ?
+    await getApiService()
+      .getFullExperienceInfo(id)
+      .catch((e) => {
+        console.error(e);
+        Astro.response.status = 404;
+        return null;
+      }) :
+    null;
+
+function getStyledDates() {
+  if (!content) return "";
+
+  const startDate = new Date(content.start_date);
+
+  let res = `From ${startDate.getMonth() + 1}/${startDate.getFullYear() % 1000} To`;
+
+  if (content.end_date) {
+    const endDate = new Date(content.end_date);
+    res += ` ${endDate.getMonth() + 1}/${endDate.getFullYear() % 1000}`;
+  } else {
+    res += " Today";
+  }
+
+  return res;
+}
+---
+{
+content && <ExperiencePage MetaTags={{}} title="Hello" >
+  <div class={DetailedExperience.container}>
+    <section class={DetailedExperience.header}>
+      <div class={DetailedExperience.job}>
+        <h1>{ content.job }</h1>
+        <span>{ content.company }</span>
+      </div>
+      <div class={DetailedExperience.extra_info}>
+        <span>
+          { getStyledDates() }
+        </span>
+        <div class={DetailedExperience.stack}>
+          {
+            content.stack.map((x) => <IconChip name={x} />)
+          }
+        </div>
+      </div>
+    </section>
+    <section>
+      <RichText className={DetailedExperience.text_cont} content={content.description}/>
+    </section>
+  </div>
+  </ExperiencePage>
+}

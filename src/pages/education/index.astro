@@ -1,0 +1,38 @@
+---
+import { List } from "@/components";
+import { EducationItem } from "@/components/List/items";
+import { TowColums, type StandardProps } from "@/layouts";
+import { getApiService } from "@/services";
+
+const props = Astro.props;
+const response = await getApiService().getShortEducation();
+
+export interface Props extends StandardProps {}
+
+// * An stupid fix to stupid esrror
+const slotName = Astro.slots.has("default") ? "right" : "";
+
+export const prerender = false;
+---
+
+<TowColums
+  title={props.title ?? "Education"}
+  MetaTags={{
+    "og:url": "/education",
+    "twitter:url": "/education",
+    "twitter:title": "Sebastian's Courses",
+    "og:title": "Sebastian's Courses",
+    keywords: "Software enginner, Mision Tic 2022, " +
+      "Mision Tic, GPC course, Course, Certificate, Degre",
+    "twitter:description": "Courses, degree, certificates of a " +
+      "web developer Full stack",
+    "og:description": "Courses, degree, certificates of a " +
+      "web developer Full stack",
+    description: "Courses, degree, certificates of a " +
+      "web developer Full stack",
+    ...props.MetaTags,
+  }}
+>
+  <List initialData={response} Component={EducationItem} slot="left" />
+  { Astro.slots.has("default") ? <slot slot={slotName} /> : null }
+</TowColums>

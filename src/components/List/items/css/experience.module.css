@@ -1,0 +1,25 @@
+.subtitle {
+  color: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 1.3em;
+}
+
+.container > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stack {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  overflow: hidden;
+  flex-wrap: wrap;
+  max-height: calc(1em + 14px);
+  justify-content: flex-end;
+  align-items: center;
+}

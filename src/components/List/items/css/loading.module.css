@@ -1,0 +1,29 @@
+.loading::before {
+  content: "";
+  width: 50%;
+  height: 2.1em;
+  display: block;
+}
+
+.loading::after {
+  content: "";
+  width: 80%;
+  height: 1.3em;
+  display: block;
+}
+
+.loading::after,
+.loading::before {
+  background-color: rgba(var(--dark-blue-rgb), .1);
+  border-radius: 15px;
+  animation: blink alternate infinite 1s;
+}
+
+@keyframes blink {
+  from {
+    background-color: rgba(var(--dark-blue-rgb), .1);
+  }
+  to {
+    background-color: rgba(var(--dark-blue-rgb), .3);
+  }
+}

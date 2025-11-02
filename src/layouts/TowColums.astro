@@ -1,0 +1,38 @@
+---
+import { About, Decoration, HouseIcon, ReturnIcon } from "@/components";
+import { Standard, type StandardProps } from ".";
+import styles from "./towcolums.module.css";
+import { extendsClassName } from "@/utils/client";
+
+const path = Astro.url.pathname;
+const previusPath = path.slice(0, path.lastIndexOf("/"));
+
+export type Props = Pick<StandardProps, "title" | "MetaTags">;
+
+const props = Astro.props;
+---
+
+<Standard {...props} className={styles.content}>
+  <aside class={styles.left}>
+    <About class={styles.about}>
+      <slot name="left" />
+    </About>
+  </aside>
+  {
+    Astro.slots.has("right") ?
+      <div class={styles.second}>
+        <div class={styles["content-nav"]}>
+          <a href={previusPath}>
+            <ReturnIcon className={styles.icon} />
+          </a>
+          <a href="/">
+            <HouseIcon className={extendsClassName(styles.icon, styles.home)} />
+          </a>
+        </div>
+        <section class={styles.right}>
+          <slot name="right" />
+        </section>
+      </div> :
+      <Decoration />
+  }
+</Standard>

@@ -1,0 +1,22 @@
+.txt {
+  font-weight: 600;
+  color: var(--white);
+}
+
+.obj {
+  color: #67e480;
+}
+
+.method {
+  color: #988bc7;
+}
+
+.str,
+.quote {
+  color: #e7de79;
+}
+
+.quote {
+  border: solid 1px rgba(var(--white-rgb), 0.8);
+  padding: 0 1px;
+}

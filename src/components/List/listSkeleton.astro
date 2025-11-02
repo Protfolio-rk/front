@@ -1,0 +1,17 @@
+---
+import style from "./List.module.css";
+import { extendsClassName } from "@/utils/client";
+import { Loading } from "./items";
+export type { HTMLAttributes as Props } from "astro/types";
+
+const props = Astro.props;
+---
+
+<section class={style.list_cont} style={{ overflowY: "hidden" }}>
+  <ul {...props} class={extendsClassName(style.list, props.className)}>
+    <Loading />
+    <Loading />
+    <Loading />
+    <Loading />
+  </ul>
+</section>

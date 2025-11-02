@@ -1,0 +1,28 @@
+.list_cont {
+  overflow-y: auto;
+  direction: rtl;
+
+  -webkit-mask-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 30px
+  );
+  mask-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 30px);
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.list {
+  direction: ltr;
+  list-style: none;
+  position: relative;
+
+  width: 90%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 20px;
+}

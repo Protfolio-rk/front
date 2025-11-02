@@ -1,0 +1,13 @@
+---
+import { HouseIcon } from "@/components";
+import { ErrorPageStyle } from "@/css";
+import Standard from "@/layouts/Standard.astro";
+---
+
+<Standard MetaTags={{}}>
+  <div class={ErrorPageStyle.container}>
+    <h1>404</h1>
+    <div class="subtitle">Are you lost?</div>
+    <a href="/"><HouseIcon className={ErrorPageStyle.house} /> Go home</a>
+  </div>
+</Standard>

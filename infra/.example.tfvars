@@ -1,0 +1,13 @@
+project_name           = ""
+cms_domain_name        = ""
+cdn_domain_name        = ""
+api_gateway_vpclink_id = ""
+aws_region             = ""
+ecs_cluster_id         = ""
+ecs_lb_arn             = ""
+ecs_role_arn           = ""
+front_repository_url   = ""
+security_group_ids     = []
+subnet_ids = []
+vpc_cidr_block = ""
+vpc_id = ""

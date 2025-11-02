@@ -1,0 +1,39 @@
+---
+import { List } from "@/components/List";
+import { ProyectItem } from "@/components/List/items";
+import { TowColums, type StandardProps } from "@/layouts";
+import { getApiService } from "@/services";
+
+const props = Astro.props;
+const response = await getApiService().getShortProyect();
+
+// * An stupid fix to stupid esrror
+const slotName = Astro.slots.has("default") ? "right" : "";
+
+export interface Props extends StandardProps {}
+export const prerender = false;
+---
+
+<TowColums
+  title={props.title ?? "Proyects"}
+  MetaTags={{
+    description:
+      "Proyects of a web developer. there are " +
+      "multiple proyects with different stacks",
+    "twitter:description":
+      "Proyects of a web developer. there are " +
+      "multiple proyects with different stacks",
+    "og:description":
+      "Proyects of a web developer. there are " +
+      "multiple proyects with different stacks",
+    "og:title": "Sebastian's Proyects",
+    "twitter:title": "Sebastian's Proyects",
+    "og:url": "/proyects",
+    "twitter:url": "/proyects",
+    keywords: "Proyects, Developer, ",
+    ...props.MetaTags,
+  }}
+>
+  <List initialData={response} Component={ProyectItem} slot="left" />
+  {Astro.slots.has("default") ? <slot slot={slotName} /> : null}
+</TowColums>

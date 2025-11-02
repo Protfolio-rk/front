@@ -1,0 +1,36 @@
+---
+import { List } from "@/components/List";
+import { ExperienceItem } from "@/components/List/items";
+import { TowColums, type StandardProps } from "@/layouts";
+import { getApiService } from "@/services";
+
+const props = Astro.props;
+const response = await getApiService().getShortExperience();
+
+// * An stupid fix to stupid esrror
+const slotName = Astro.slots.has("default") ? "right" : "";
+
+export interface Props extends StandardProps {}
+export const prerender = false;
+---
+
+<TowColums
+  title={props.title ?? "Proyects"}
+  MetaTags={{
+    description:
+      "Experience of a web developer.",
+    "twitter:description":
+      "Proyects of a web developer",
+    "og:description":
+      "Proyects of a web developer.",
+    "og:title": "Sebastian's Experiences",
+    "twitter:title": "Sebastian's Experiences",
+    "og:url": "/experience",
+    "twitter:url": "/experience",
+    keywords: "Experience, Developer, ",
+    ...props.MetaTags,
+  }}
+>
+  <List initialData={response} Component={ExperienceItem} slot="left" />
+  {Astro.slots.has("default") ? <slot slot={slotName} /> : null}
+</TowColums>

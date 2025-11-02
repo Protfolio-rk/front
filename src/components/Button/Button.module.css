@@ -1,0 +1,47 @@
+.btn {
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+
+  text-align: center;
+
+  width: 10rem;
+  height: 3rem;
+
+  border-width: 0;
+  background: var(--white);
+  border-style: solid;
+  border-color: var(--blue-02);
+  
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn span {
+  position: relative;
+  color: var(--blue-02);
+  font-weight: 800;
+  font-size: medium;
+  z-index: 100;
+  transition: color .1s ease-in;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: var(--blue-02);
+  transition: height .1s ease-out;
+}
+
+.btn:hover span, .actived span{
+  color: var(--white);
+}
+.btn:hover::before, .actived::before {
+  height: 100%;
+}

@@ -1,0 +1,48 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "semistandard",
+    "plugin:astro/recommended"
+  ],
+
+  "env": {
+    "browser": true,
+    "es2023": true
+  },
+  "globals": {
+    "JSX": "readonly"
+  },
+
+  "overrides": [
+    {
+      "files": ["*.astro"],
+      "parser": "astro-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"]
+      }
+    }
+  ],
+
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "quotes": ["error", "double"],
+    "comma-dangle": ["error", "only-multiline"],
+    "space-before-function-paren": [
+      "error",
+      {
+        "asyncArrow": "always",
+        "anonymous": "never",
+        "named": "never"
+      }
+    ],
+    "operator-linebreak": ["error", "after"],
+    "@typescript-eslint/no-unused-vars": ["error"]
+  }
+}

@@ -1,0 +1,46 @@
+---
+import { ColombiaFlag, GithubLogo, MessageIcon } from "@/components";
+import { LogCode } from "@/components/LogCode";
+import TowColums from "@/layouts/TowColums.astro";
+import { Home } from "@/css";
+
+const bornDate = new Date(2003, 1, 8);
+const today = new Date();
+
+const diff = today.getTime() - bornDate.getTime();
+---
+
+<TowColums MetaTags={{}}>
+  <div slot="left" class={Home.home_page}>
+    <LogCode
+      client:visible
+      text={["web developer", "from colombia", "learn quickly", "gamer"]}
+    />
+    <div class={Home.data}>
+      <div class={Home.rowdata}>
+        <span>Born Date:</span>
+        <p>
+          {bornDate.toLocaleDateString() + " "}(
+          {Math.floor(diff / (1000 * 3600 * 24 * 365))})
+        </p>
+      </div>
+      <div class={Home.rowdata}>
+        <span>Location:</span>
+        <p>
+          <ColombiaFlag className={Home.country_flag} />
+          Colombia
+        </p>
+      </div>
+    </div>
+    <div class={Home.links}>
+      <a href="https://github.com/Ru-kko/portfolio">
+        <GithubLogo />
+        <span> Source </span>
+      </a>
+      <a href="/contact">
+        <MessageIcon />
+        <span> Contact </span>
+      </a>
+    </div>
+  </div>
+</TowColums>

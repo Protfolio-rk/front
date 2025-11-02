@@ -1,0 +1,123 @@
+---
+import { getApiService } from "@/services";
+import EducationPage from "./index.astro";
+import { RichText } from "@/components";
+
+const { id } = Astro.params;
+const content =
+  id ?
+    await getApiService()
+      .getFullEducationInfo(id)
+      .catch((e) => {
+        console.error(e);
+        Astro.response.status = 404;
+        return null;
+      }) :
+    null;
+
+function getStyledDates() {
+  if (!content) return "";
+
+  const startDate = new Date(content.start_date);
+
+  let res = `${startDate.getMonth() + 1}/${startDate.getFullYear() % 1000}`;
+
+  if (content.end_date) {
+    const endDate = new Date(content.end_date);
+    res += ` ${endDate.getMonth() + 1}/${endDate.getFullYear() % 1000}`;
+  } else {
+    res += " Today";
+  }
+
+  return res;
+}
+
+export const prerender = false;
+---
+
+{
+  content &&
+    <EducationPage
+      title={content.title}
+      MetaTags={{
+        "og:title": content.title,
+        "twitter:title": content.title,
+        "og:url": "/education/" + content.id,
+        "twitter:url": "/education/" + content.id,
+        "twitter:description": content.resume,
+        "og:description": content.resume,
+        keywords: content.keywords.map(v => v.name).join(", "),
+      }}
+      >
+      <div class="detail">
+        <div class="head">
+          <h1>{content.title}</h1>
+          <span
+            style={`--label-color:${(() => {
+              switch (content.type) {
+                case "certificate":
+                  return "#eb8c34";
+                case "course":
+                  return "#dc34eb";
+                case "degree":
+                  return "#49eb34";
+              }
+            })()};`}
+            class="ctrf_type"
+          >
+            {content.type}
+          </span>
+          <span class="sub">{content.from}</span>
+          <span class="dates">{getStyledDates()}</span>
+        </div>
+        <RichText content={content.description} />
+      </div>
+    </EducationPage>
+}
+<style>
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 5px 20px;
+    max-width: calc(100% - 10px);
+  }
+  .head {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    grid-template-rows: repeat(2, auto);
+    gap: 5px;
+    padding-bottom: 5px;
+    border-bottom: solid 2px var(--white);
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+  }
+  .sub {
+    justify-self: left;
+    color: var(--gray-01);
+    font-size: 1.2em;
+    width: 100%;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ctrf_type {
+    border: 2px solid;
+    border-radius: 1em;
+    padding: 3px 5px;
+    font-weight: 700;
+    border-color: var(--label-color);
+    color: var(--label-color);
+    align-self: self-start;
+  }
+  .dates {
+    text-align: center;
+  }
+  h1 {
+    font-size: 3.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,16 @@
+---
+import { ContactForm } from "@/components/contact";
+import { TowColums } from "@/layouts";
+---
+
+<TowColums
+  title="Contact"
+  MetaTags={{
+    description: "Contact me!, i will see your message as soon as possible",
+    keywords: "Conatact a dev",
+    "og:url": "/contact",
+    "twitter:url": "/contact"
+  }}
+>
+  <ContactForm slot="left" client:load />
+</TowColums>

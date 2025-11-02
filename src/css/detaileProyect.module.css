@@ -1,0 +1,53 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 5px 0;
+}
+.head {
+  display: flex;
+  gap: 10px;
+  margin: 0 20px;
+  padding-bottom: 20px;
+  border-bottom: solid 2px var(--white);
+  justify-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.stack {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.repo {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--gray-01);
+}
+.text {
+  padding: 0 20px;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.title a:hover svg {
+  fill: var(--blue-01);
+}
+
+.title svg {
+  fill: var(--gray-01);
+  width: 3em;
+}
+
+.title h1 {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

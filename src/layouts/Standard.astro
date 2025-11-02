@@ -1,0 +1,245 @@
+---
+import { Background } from "@/components";
+import type { StandardProps, MetaTags as Meta } from ".";
+import type { HTMLAttributes } from "react";
+import { ViewTransitions } from "astro:transitions";
+import { APP_DOMAIN } from "@/utils/enviroment";
+
+export interface Props extends StandardProps, HTMLAttributes<HTMLElement> {}
+
+const { title = "Sebastian Vera", MetaTags, ...attr } = Astro.props;
+const initialMeta: Meta = {
+  author: "Sebastian Vera",
+  description:
+    "Web developer portfolio with +1 years of experience" +
+    "Full stack with knowledge of node, java, angular, react.",
+  "og:description":
+    "Web developer portfolio with +1 years of experience" +
+    "Full stack with knowledge of node, java, angular, react.",
+  "twitter:description":
+    "Web developer portfolio with +1 years of experience" +
+    "Full stack with knowledge of node, java, angular, react.",
+  "twitter:title": title,
+  "og:title": title,
+  "og:image": APP_DOMAIN + "/card.webp",
+  "twitter:image": APP_DOMAIN + "/card.webp",
+  ...MetaTags,
+  keywords: "Web developer, Portfolio, Full stack, Front end, Back end".concat(
+    MetaTags.keywords ? ", " + MetaTags.keywords : ""
+  ),
+  "og:url": APP_DOMAIN.concat(MetaTags["og:url"] ?? "/"),
+  "twitter:url": APP_DOMAIN.concat(MetaTags["twitter:url"] ?? "/"),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {Object.entries(initialMeta).map(([k, v]) => <meta name={k} content={v} />)}
+    <ViewTransitions />
+    <title>{title}</title>
+    <link rel="shortcut icon" href="/icon.ico" type="image/x-icon" />
+    <style is:global>
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-BlackItalic.ttf") format("truetype");
+        font-weight: 900;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-BoldItalic.ttf") format("truetype");
+        font-weight: 700;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-Italic.ttf") format("truetype");
+        font-weight: normal;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-Light.ttf") format("truetype");
+        font-weight: 300;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-Medium.ttf") format("truetype");
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-ThinItalic.ttf") format("truetype");
+        font-weight: 100;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-Black.ttf") format("truetype");
+        font-weight: 900;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-LightItalic.ttf") format("truetype");
+        font-weight: 300;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-MediumItalic.ttf") format("truetype");
+        font-weight: 500;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Roboto";
+        src: url("/fonts/Roboto-Thin.ttf") format("truetype");
+        font-weight: 100;
+        font-style: normal;
+      }
+
+      :root {
+        --white: #fdfdfd;
+        --gray-01: #cbd5dc;
+        --blue-01: #76dfe2;
+        --blue-02: #2c9fb9;
+        --slate-gray-01: #294759;
+        --slate-gray-02: #284253;
+        --slate-gray-03: #2f4251;
+        --slate-gray-o4: #213543;
+        --slate-gray-05: #1d2c3b;
+        --slate-gray-07: #18212b;
+        --slate-gray-08: #141e28;
+        --slate-gray-09: #111b25;
+        --dark-blue: #020611;
+        --black: #101010;
+        --white-rgb: 253, 253, 253;
+        --gray-01-rgb: 203, 213, 220;
+        --blue-01-rgb: 118, 223, 226;
+        --blue-02-rgb: 44, 159, 185;
+        --slate-gray-01-rgb: 41, 71, 89;
+        --slate-gray-02-rgb: 40, 66, 83;
+        --slate-gray-03-rgb: 47, 66, 81;
+        --slate-gray-o4-rgb: 33, 53, 67;
+        --slate-gray-05-rgb: 29, 44, 59;
+        --slate-gray-07-rgb: 24, 33, 43;
+        --slate-gray-08-rgb: 20, 30, 40;
+        --slate-gray-09-rgb: 17, 27, 37;
+        --dark-blue-rgb: 2, 6, 17;
+        --black-rgb: 16, 16, 16;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+        font-family: "Roboto", sans-serif;
+        box-sizing: border-box;
+      }
+
+      *::-webkit-scrollbar {
+        position: absolute;
+        left: 0;
+        width: 10px;
+      }
+      *::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      *::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: #888;
+      }
+
+      body {
+        color: var(--white);
+        position: relative;
+        bottom: 0;
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        background: linear-gradient(
+            180deg,
+            var(--blue-01) 0%,
+            var(--blue-02) 100%
+          )
+          fixed;
+      }
+
+      @media only screen and (max-width: 800px) {
+        body {
+          flex-direction: column;
+        }
+      }
+      h1,
+      h2 {
+        color: var(--white);
+      }
+
+      h1 {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 4em;
+      }
+
+      h2 {
+        font-weight: 700;
+        font-size: 3.5em;
+      }
+
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 500;
+        color: var(--gray-01);
+      }
+
+      h3 {
+        font-size: 3em;
+      }
+      h4 {
+        font-size: 2.5em;
+      }
+      h5 {
+        font-size: 2em;
+      }
+      h6 {
+        font-size: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <Background {...attr}>
+      <slot />
+    </Background>
+  </body>
+</html>

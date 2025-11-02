@@ -1,0 +1,27 @@
+.decoration {
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 25%;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 50px;
+}
+
+.decoration > svg {
+  width: 60px;
+  height: 60px;
+
+  fill: var(--slate-gray-09);
+  stroke: var(--slate-gray-09);
+}
+
+@media only screen and (max-width: 1200px){
+  .decoration {
+    display: none;
+  }
+}

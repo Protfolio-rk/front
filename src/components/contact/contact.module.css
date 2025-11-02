@@ -1,0 +1,148 @@
+.contact_form {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact_form > label {
+  position: relative;
+  width: 25em;
+  max-width: 80vw;
+  padding: 5px 1em;
+  margin-top: 1em;
+
+  border-radius: 25px;
+  background-color: var(--slate-gray-03);
+  font-size: 1.15em;
+}
+
+.contact_form > label span {
+  position: absolute;
+  top: 5px;
+  left: 1em;
+
+  color: var(--white);
+  font-weight: 600;
+
+  transition: all 0.3s ease-in;
+}
+
+.contact_form input:not([type="submit"]),
+.contact_form textarea {
+  background-color: transparent;
+  border: none;
+  resize: none;
+  width: 100%;
+  height: 100%;
+  color: var(--white);
+}
+
+.contact_form > div {
+  border-radius: 50px;
+  padding: 0 8px;
+  min-height: calc(1.3em + 8px);
+  background-color: var(--slate-gray-09);
+}
+
+.contact_form input[type="submit"] {
+  border: none;
+  margin-top: 3px;
+  font-size: 1.3em;
+  font-weight: 900;
+  color: var(--gray-01);
+  background: none;
+}
+
+.contact_form:valid input[type="submit"]:hover {
+  color: var(--white);
+  background-color: var(--slate-gray-01);
+}
+
+.contact_form:valid > div:hover {
+  background-color: var(--slate-gray-01);
+}
+
+.contact_form:invalid input[type="submit"] {
+  display: none;
+}
+
+.contact_form:invalid > div {
+  background: none;
+}
+
+.contact_form textarea {
+  height: 10em;
+}
+
+.contact_form input:focus-visible,
+.contact_form textarea:focus-visible {
+  border: none;
+  outline: none;
+}
+
+.contact_form > label:has(input:not(:placeholder-shown):invalid) {
+  background-color: var(--dark-blue);
+}
+
+.contact_form > label:has(input:not(:placeholder-shown):invalid)::after {
+  position: absolute;
+  content: attr(invalid-txt);
+  color: var(--white);
+  width: fit-content;
+  font-size: 0.8em;
+  right: 8px;
+  top: calc(-1em - 5px);
+}
+
+.contact_form input:focus ~ span,
+.contact_form input:not(:placeholder-shown) ~ span,
+.contact_form textarea:focus ~ span,
+.contact_form textarea:valid ~ span {
+  font-weight: 900;
+  top: calc(-1em - 5px);
+}
+
+.contact_form textarea:not(:focus)::placeholder {
+  color: transparent;
+}
+
+.float {
+  position: absolute;
+  width: 200px;
+  left: calc(50% - 100px);
+  top: -100%;
+  z-index: 1000;
+  
+  animation: floatError 3s ease-in-out forwards;
+  background-color: var(--slate-gray-07);
+  border-radius: 20px;
+}
+.float span {
+  font-size: 1.2em; 
+  font-weight: 700;
+  color: var(--white);
+}
+.float p {
+  color: var(--gray-01);
+  margin-top: 10px;
+}
+
+@keyframes floatError {
+  0% {
+    top: -100%;
+  }
+  5% {
+    top: 20px;
+  }
+  95% {
+    top: 20px;
+  }
+  to {
+    top: -100%;
+  }
+}

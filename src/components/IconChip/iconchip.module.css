@@ -1,0 +1,26 @@
+.chip {
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.chip_container {
+  color: var(--chip-color);
+  border: solid 2px var(--chip-color);
+  border-radius: 1em;
+  display: flex;
+  gap: 5px;
+  padding: 3px 10px;
+  width: fit-content;
+  align-items: center;
+}
+
+.chip_container > svg {
+  height: 1em;
+  width: 1em;
+  fill: var(--chip-color);
+}
+
+svg.react {
+  stroke: var(--chip-color);
+}
