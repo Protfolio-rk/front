@@ -46,7 +46,7 @@ resource "aws_ecs_task_definition" "client" {
         },
         {
           name  = "GRAPHQL_HOST"
-          value = "https://${var.cms_domain_name}/api/graphql"
+          value = "http://${var.cms_domain_name}/api/graphql"
         },
         {
           name  = "STATIC_PATH"
