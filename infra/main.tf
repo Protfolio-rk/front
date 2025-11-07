@@ -12,6 +12,7 @@ module "client" {
   subnet_ids          = var.subnet_ids
   security_group_ids  = var.security_group_ids
   container_image_url = var.front_repository_url
+  image_tag           = var.image_tag
 
   ecs_cluster_id = var.ecs_cluster_id
   ecs_role_arn   = var.ecs_role_arn
