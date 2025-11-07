@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "client" {
   container_definitions = jsonencode([
     {
       name  = "client"
-      image = "${var.container_image_url}:latest"
+      image = "${var.container_image_url}:${var.image_tag}"
 
       portMappings = [
         {

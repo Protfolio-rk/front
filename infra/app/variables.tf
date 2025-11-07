@@ -42,6 +42,10 @@ variable "container_image_url" {
   type = string
 }
 
+variable "image_tag" {
+  type    = string
+}
+
 variable "container_port" {
   type = number
   default = 4321

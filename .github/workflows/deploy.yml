@@ -28,15 +28,16 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.FRONT_REPOSITORY_URL }}
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           echo "Building Docker image for production..."
-          docker build -t $ECR_REPOSITORY:latest .
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           
           echo "Tagging image for ECR..."
-          docker tag $ECR_REPOSITORY:latest $ECR_REPOSITORY:latest
+          docker tag $ECR_REPOSITORY:latest $ECR_REPOSITORY:$IMAGE_TAG
 
           echo "Pushing image to Amazon ECR..."
-          docker push $ECR_REPOSITORY:latest
+          docker push $ECR_REPOSITORY:$IMAGE_TAG
       
       - name: Deploy infrastructure with Terraform
         uses: hashicorp/setup-terraform@v3
@@ -49,6 +50,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
           TF_VAR_project_name: portfolio-rk
+          TF_VAR_image_tag: ${{ github.sha }}
           TF_VAR_cms_domain_name: ${{ secrets.CMS_DOMAIN_NAME }}
           TF_VAR_cdn_domain_name: ${{ secrets.CDN_DOMAIN_NAME }}
           TF_VAR_api_gateway_vpclink_id: ${{ secrets.API_GATEWAY_VPCLINK_ID }}
@@ -64,6 +66,3 @@ jobs:
           cd infra
           terraform init
           terraform apply -auto-approve
-
-          
-
