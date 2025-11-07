@@ -62,6 +62,7 @@ jobs:
           TF_VAR_vpc_id: ${{ secrets.VPC_ID }}
         run: |
           cd infra
+          terraform init
           terraform apply -auto-approve
 
           
