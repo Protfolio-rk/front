@@ -67,3 +67,8 @@ variable "front_repository_url" {
   type        = string
   description = "The URL of the front-end ECR repository."
 }
+
+variable "image_tag" {
+  type        = string
+  description = "The tag of the container image."
+}
