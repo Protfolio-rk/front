@@ -31,13 +31,12 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           echo "Building Docker image for production..."
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-          
-          echo "Tagging image for ECR..."
-          docker tag $ECR_REPOSITORY:latest $ECR_REPOSITORY:$IMAGE_TAG
+          # build with both a unique tag (commit SHA) and latest
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REPOSITORY:latest .
 
-          echo "Pushing image to Amazon ECR..."
+          echo "Pushing image tags to Amazon ECR..."
           docker push $ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REPOSITORY:latest
       
       - name: Deploy infrastructure with Terraform
         uses: hashicorp/setup-terraform@v3
