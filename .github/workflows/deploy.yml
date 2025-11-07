@@ -33,10 +33,10 @@ jobs:
           docker build -t $ECR_REPOSITORY:latest .
           
           echo "Tagging image for ECR..."
-          docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker tag $ECR_REPOSITORY:latest $ECR_REPOSITORY:latest
 
           echo "Pushing image to Amazon ECR..."
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REPOSITORY:latest
       
       - name: Deploy infrastructure with Terraform
         uses: hashicorp/setup-terraform@v3
