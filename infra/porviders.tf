@@ -7,8 +7,15 @@ terraform {
       version = "~> 6.0"
     }
   }
+
+  backend "s3" {
+    bucket         = "portfolio-rk-persist-tfinfra"
+    key            = "portfolio/terraform.tfstate"
+    dynamodb_table = "portfolio-rk-tf-locks"
+    encrypt        = false
+  }
 }
 
 provider "aws" {
-  region              = var.aws_region
+  region = var.aws_region
 }
